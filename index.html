@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Private Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="center">
+
+<div class="join-box">
+  <h2>What do you want to do?</h2>
+
+  <button onclick="showCreate()">Create Room</button>
+  <button onclick="showJoin()">Join Room</button>
+
+  <div id="create" class="hidden">
+    <input id="cname" placeholder="Your Name">
+    <button onclick="createRoom()">Create</button>
+  </div>
+
+  <div id="join" class="hidden">
+    <input id="jname" placeholder="Your Name">
+    <input id="roomId" placeholder="Room ID">
+    <button onclick="joinRoom()">Join</button>
+  </div>
+</div>
+
+<script>
+function showCreate() {
+  document.getElementById("create").classList.remove("hidden");
+  document.getElementById("join").classList.add("hidden");
+}
+
+function showJoin() {
+  document.getElementById("join").classList.remove("hidden");
+  document.getElementById("create").classList.add("hidden");
+}
+
+function createRoom() {
+  const name = cname.value.trim();
+  if (!name) return alert("Enter name");
+  const room = Math.random().toString(36).substring(2, 10);
+  window.location.href =
+    `/chat.html?room=${room}&name=${name}&role=owner`;
+}
+
+function joinRoom() {
+  const name = jname.value.trim();
+  const room = roomId.value.trim();
+  if (!name || !room) return alert("Fill all fields");
+  window.location.href =
+    `/chat.html?room=${room}&name=${name}&role=joiner`;
+}
+</script>
+
+</body>
+</html>
